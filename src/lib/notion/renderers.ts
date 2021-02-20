@@ -1,12 +1,18 @@
-import React from 'react'
-import components from '../../components/dynamic'
+import React, { ReactNode } from 'react'
+import components from '../../components/components'
+import { Text } from './blocks'
 
-function applyTags(tags = [], children, noPTag = false, key) {
+function applyTags(
+  tags: string[],
+  children: ReactNode,
+  noPTag = false,
+  key: number
+) {
   let child = children
 
   for (const tag of tags) {
     const props: { [key: string]: any } = { key }
-    let tagName = tag[0]
+    let tagName: ReactNode = tag[0]
 
     if (noPTag && tagName === 'p') tagName = React.Fragment
     if (tagName === 'c') tagName = 'code'
@@ -23,25 +29,25 @@ function applyTags(tags = [], children, noPTag = false, key) {
       child = tag[1]
     }
 
-    child = React.createElement(components[tagName] || tagName, props, child)
+    child = React.createElement(
+      components[tagName as string] || tagName,
+      props,
+      child
+    )
   }
   return child
 }
 
-export function textBlock(text = [], noPTag = false, mainKey) {
-  const children = []
-  let key = 0
+export function textBlock(text: Text[], noPTag = false, mainKey) {
+  const children = text.reduce((children, text, i) => {
+    return [
+      ...children,
+      text[1] ? applyTags(text[1], text[0], noPTag, i) : text,
+    ]
+  }, [])
 
-  for (const textItem of text) {
-    key++
-    if (textItem.length === 1) {
-      children.push(textItem)
-      continue
-    }
-    children.push(applyTags(textItem[1], textItem[0], noPTag, key))
-  }
   return React.createElement(
-    noPTag ? React.Fragment : components.p,
+    noPTag ? React.Fragment : 'p',
     { key: mainKey },
     ...children,
     noPTag

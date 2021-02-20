@@ -7,9 +7,8 @@ const collectText = (el, acc = []) => {
   return acc.join('').trim()
 }
 
-export default ({ children: component, id }: { children: any; id?: any }) => {
-  const children = component.props.children || ''
-  let text = children
+const Heading = ({ children: component, id }: { children: any; id?: any }) => {
+  let text = component.props.children || ''
 
   if (null == id) {
     id = collectText(text)
@@ -24,3 +23,5 @@ export default ({ children: component, id }: { children: any; id?: any }) => {
     </a>
   )
 }
+
+export default Heading

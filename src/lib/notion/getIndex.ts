@@ -3,12 +3,18 @@ import rpc, { values } from './rpc'
 import getTableData from './getTableData'
 import { getPostPreview } from './getPostPreview'
 import { readFile, writeFile } from '../fs-helpers'
-import { BLOG_INDEX_ID, BLOG_INDEX_CACHE } from './server-constants'
+import { SOURCES } from './server-constants'
+import { Blog, implementsBlog, Page, Post } from './types'
+import { CollectionBlock, implementsCollectionBlock } from './blocks'
 
-export default async function getBlogIndex(previews = true) {
-  let postsTable: any = null
+export default async function getIndex(kind: 'blog'): Promise<Blog[]>
+export default async function getIndex(kind: 'pages'): Promise<Page[]>
+export default async function getIndex(
+  kind: keyof typeof SOURCES
+): Promise<Post[]> {
+  let postsTable: Post[]
   const useCache = process.env.USE_CACHE === 'true'
-  const cacheFile = `${BLOG_INDEX_CACHE}${previews ? '_previews' : ''}`
+  const cacheFile = `${SOURCES[kind].cache}_previews`
 
   if (useCache) {
     try {
@@ -21,7 +27,7 @@ export default async function getBlogIndex(previews = true) {
   if (!postsTable) {
     try {
       const data = await rpc('loadPageChunk', {
-        pageId: BLOG_INDEX_ID,
+        pageId: SOURCES[kind].index,
         limit: 999, // TODO: figure out Notion's way of handling pagination
         cursor: { stack: [] },
         chunkNumber: 0,
@@ -29,41 +35,38 @@ export default async function getBlogIndex(previews = true) {
       })
 
       // Parse table with posts
-      const tableBlock = values(data.recordMap.block).find(
-        (block: any) => block.value.type === 'collection_view'
+      const tableBlock = values(data.recordMap.block).find(block =>
+        implementsCollectionBlock(block)
       )
 
-      postsTable = await getTableData(tableBlock, true)
+      postsTable = await getTableData(
+        tableBlock as CollectionBlock,
+        kind === 'pages'
+      )
     } catch (err) {
       console.error(`Failed to load Notion posts`, err)
       return []
     }
 
     // only get 10 most recent post's previews
-    const postsKeys = Object.keys(postsTable).splice(0, 10)
+    postsTable = postsTable.splice(0, 10)
 
-    const sema = new Sema(3, { capacity: postsKeys.length })
+    const sema = new Sema(3, { capacity: postsTable.length })
 
-    if (previews) {
-      await Promise.all(
-        postsKeys
-          .sort((a, b) => {
-            const postA = postsTable[a]
-            const postB = postsTable[b]
-            const timeA = postA.Date
-            const timeB = postB.Date
-            return Math.sign(timeB - timeA)
-          })
-          .map(async postKey => {
-            await sema.acquire()
-            const post = postsTable[postKey]
-            post.preview = post.id
-              ? await getPostPreview(postsTable[postKey].id)
-              : []
-            sema.release()
-          })
-      )
-    }
+    await Promise.all(
+      postsTable
+        .sort((a, b) => {
+          if (!implementsBlog(a) || !implementsBlog(b)) {
+            return 0
+          }
+          return Math.sign(b.Date - a.Date)
+        })
+        .map(async post => {
+          await sema.acquire()
+          post.preview = post.id ? await getPostPreview(post.id) : []
+          sema.release()
+        })
+    )
 
     if (useCache) {
       writeFile(cacheFile, JSON.stringify(postsTable), 'utf8').catch(() => {})

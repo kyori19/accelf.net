@@ -1,6 +1,9 @@
 import rpc from './rpc'
+import { User } from './types'
 
-export default async function getNotionUsers(ids: string[]) {
+export default async function getNotionUsers(
+  ...ids: string[]
+): Promise<User[]> {
   const { results = [] } = await rpc('getRecordValues', {
     requests: ids.map((id: string) => ({
       id,
@@ -8,18 +11,17 @@ export default async function getNotionUsers(ids: string[]) {
     })),
   })
 
-  const users: any = {}
+  return results.map(result => {
+    const { value } = result
+    const { id, given_name, family_name } = value
+    let fullName = given_name || ''
 
-  for (const result of results) {
-    const { value } = result || { value: {} }
-    const { given_name, family_name } = value
-    let full_name = given_name || ''
-
-    if (family_name) {
-      full_name = `${full_name} ${family_name}`
+    if (family_name && family_name !== '.') {
+      fullName = `${fullName} ${family_name}`
     }
-    users[value.id] = { full_name }
-  }
-
-  return { users }
+    return {
+      id,
+      fullName,
+    }
+  })
 }

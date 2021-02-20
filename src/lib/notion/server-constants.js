@@ -16,13 +16,25 @@ const normalizeId = id => {
 }
 
 const NOTION_TOKEN = process.env.NOTION_TOKEN
-const BLOG_INDEX_ID = normalizeId(process.env.BLOG_INDEX_ID)
 const API_ENDPOINT = 'https://www.notion.so/api/v3'
+const BLOG_INDEX_ID = normalizeId(process.env.BLOG_INDEX_ID)
 const BLOG_INDEX_CACHE = path.resolve('.blog_index_data')
+const PAGES_INDEX_ID = normalizeId(process.env.PAGES_INDEX_ID)
+const PAGES_INDEX_CACHE = path.resolve('.pages_index_cache')
+
+const SOURCES = {
+  blog: {
+    index: BLOG_INDEX_ID,
+    cache: BLOG_INDEX_CACHE,
+  },
+  pages: {
+    index: PAGES_INDEX_ID,
+    cache: PAGES_INDEX_CACHE,
+  },
+}
 
 module.exports = {
   NOTION_TOKEN,
-  BLOG_INDEX_ID,
   API_ENDPOINT,
-  BLOG_INDEX_CACHE,
+  SOURCES,
 }

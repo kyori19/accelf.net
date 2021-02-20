@@ -1,9 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const {
-  NOTION_TOKEN,
-  BLOG_INDEX_ID,
-} = require('./src/lib/notion/server-constants')
+const { NOTION_TOKEN, SOURCES } = require('./src/lib/notion/server-constants')
 
 try {
   fs.unlinkSync(path.resolve('.blog_index_data'))
@@ -32,11 +29,16 @@ if (!NOTION_TOKEN) {
   )
 }
 
-if (!BLOG_INDEX_ID) {
-  // We aren't able to build or serve images from Notion without the
-  // NOTION_TOKEN being populated
+if (!SOURCES.blog.index) {
   warnOrError(
     `\nBLOG_INDEX_ID is missing from env, this will result in an error\n` +
+      `Make sure to provide one before starting Next.js`
+  )
+}
+
+if (!SOURCES.pages.index) {
+  warnOrError(
+    `\nPAGES_INDEX_ID is missing from env, this will result in an error\n` +
       `Make sure to provide one before starting Next.js`
   )
 }

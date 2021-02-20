@@ -2,9 +2,12 @@ import '../styles/global.css'
 import 'katex/dist/katex.css'
 import Footer from '../components/footer'
 
-export default ({ Component, pageProps }) => (
+const App = ({ Component, pageProps }) => (
   <>
     <Component {...pageProps} />
     <Footer />
   </>
 )
+
+// noinspection JSUnusedGlobalSymbols
+export default App

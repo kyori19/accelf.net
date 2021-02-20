@@ -14,4 +14,5 @@ class MyDocument extends Document {
   }
 }
 
+// noinspection JSUnusedGlobalSymbols
 export default MyDocument

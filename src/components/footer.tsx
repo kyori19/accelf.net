@@ -1,23 +1,30 @@
 import ExtLink from './ext-link'
+import Link from 'next/link'
 
-export default () => (
+const Footer = () => (
   <>
     <footer>
-      <span>Deploy your own!</span>
-      <ExtLink href="https://vercel.com/import/git?s=https://github.com/ijjk/notion-blog/tree/master&env=NOTION_TOKEN,BLOG_INDEX_ID&envDescription=Required+env+values+for+deploying&envLink=https://github.com/ijjk/notion-blog%23getting-blog-index-and-token">
-        <img
-          src="https://vercel.com/button"
-          height={46}
-          width={132}
-          alt="deploy to Vercel button"
-        />
-      </ExtLink>
-      <span>
-        or{' '}
-        <ExtLink href="https://github.com/ijjk/notion-blog">
-          view source
+      <p>
+        加速を与える力のように - <Link href="/">Team AccelForce</Link>
+        <br />
+        <ExtLink href="https://odakyu.app/@ars42525" rel="me">
+          きょり @ars42525@odakyu.app
         </ExtLink>
-      </span>
+      </p>
+      <p>
+        Made from{' '}
+        <ExtLink href="https://github.com/ijjk/notion-blog">
+          notion-blog
+        </ExtLink>
+        .<br />
+        Hosted on <ExtLink href="https://vercel.com">Vercel</ExtLink>.<br />
+        Source code is published on{' '}
+        <ExtLink href="https://github.com/kyori19/accelf.net">GitHub</ExtLink>.
+        <br />
+        Copyright (c) 2021 kyori and Team AccelForce
+      </p>
     </footer>
   </>
 )
+
+export default Footer

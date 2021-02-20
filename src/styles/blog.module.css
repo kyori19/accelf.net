@@ -17,7 +17,7 @@
   justify-content: space-between;
   text-align: center;
   border: 1px solid #eaeaea;
-  width: 400px;
+  width: 600px;
   padding: 16px;
   border-radius: 5px;
 }
@@ -27,7 +27,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: none;
   background-color: black;
   border: 1px solid black;
   color: white;
@@ -93,6 +92,18 @@
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.3);
   max-width: 100%;
   display: block;
+}
+
+.post :global(.caption-block) {
+  margin: 2rem auto;
+  max-width: 100%;
+  display: block;
+  font-size: 0.8em;
+}
+
+.post :global(.caption-block img),
+.post :global(.caption-block .asset-wrapper) {
+  margin: 0;
 }
 
 .post :global(.tweet) {
