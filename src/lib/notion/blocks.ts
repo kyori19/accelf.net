@@ -164,7 +164,7 @@ export type Text = {
 type TextBlockValue = BaseBlockValue & {
   type: 'header' | 'sub_header' | 'sub_sub_header' | 'quote' | 'text'
 
-  properties: {
+  properties?: {
     title: Text[]
   }
 }

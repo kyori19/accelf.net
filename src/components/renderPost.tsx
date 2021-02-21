@@ -118,6 +118,10 @@ const RenderPost = ({
             case 'divider':
               return { elements, list }
             case 'text':
+              if (!value.properties) {
+                return { elements, list }
+              }
+
               return {
                 elements: [
                   ...elements,
