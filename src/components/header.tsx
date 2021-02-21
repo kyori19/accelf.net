@@ -3,18 +3,22 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import styles from '../styles/header.module.css'
 import { Page } from '../lib/notion/types'
-import { getPageLink } from '../lib/blog-helpers'
+import { getPageLink, postIsPublished } from '../lib/blog-helpers'
 
 const Header = ({
   titlePre = '',
   pages,
+  preview,
 }: {
   titlePre: string
   pages: Page[]
+  preview: boolean
 }) => {
   const { asPath: path } = useRouter()
 
-  const headers = pages.filter(page => page.Header === 'Yes')
+  const headers = pages
+    .filter(page => preview || postIsPublished(page))
+    .filter(page => page.Header === 'Yes')
 
   return (
     <header className={styles.header}>

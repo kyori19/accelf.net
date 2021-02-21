@@ -114,7 +114,7 @@ const RenderBlog = ({
 
   return (
     <>
-      <Header titlePre={post.Page} pages={pages} />
+      <Header titlePre={post.Page} pages={pages} preview={preview} />
       <Preview preview={preview} />
       <div className={blogStyles.post}>
         <h1>{post.Page || ''}</h1>

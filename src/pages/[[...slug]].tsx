@@ -102,7 +102,7 @@ const RenderPage = ({
 
   return (
     <>
-      <Header titlePre={post.Page} pages={pages} />
+      <Header titlePre={post.Page} pages={pages} preview={preview} />
       <Preview preview={preview} />
       <RenderPost content={post.content} />
     </>

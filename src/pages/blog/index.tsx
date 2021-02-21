@@ -58,7 +58,7 @@ const Index = ({
 }) => {
   return (
     <>
-      <Header titlePre="Blog" pages={pages} />
+      <Header titlePre="Blog" pages={pages} preview={preview} />
       <Preview preview={preview} />
       <div className={`${sharedStyles.layout} ${blogStyles.blogIndex}`}>
         <h1>Team AccelForce Blog</h1>
