@@ -99,7 +99,7 @@ export type HeaderBlockValue = BaseBlockValue & {
   }
 }
 
-type ListBlockValue = BaseBlockValue & {
+export type ListBlockValue = BaseBlockValue & {
   type: 'bulleted_list' | 'numbered_list'
 
   properties: {
