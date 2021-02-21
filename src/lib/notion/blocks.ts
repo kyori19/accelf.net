@@ -6,6 +6,32 @@ type BaseBlockValue = {
   parent_id?: string
 }
 
+type BookmarkBlockValue = BaseBlockValue & {
+  type: 'bookmark'
+
+  format: {
+    bookmark_icon: string
+    bookmark_cover: string
+  }
+  properties: {
+    link: {
+      0: {
+        0: string
+      }
+    }
+    title: {
+      0: {
+        0: string
+      }
+    }
+    description: {
+      0: {
+        0: string
+      }
+    }
+  }
+}
+
 type CalloutBlockValue = BaseBlockValue & {
   type: 'callout'
 
@@ -162,6 +188,7 @@ export function implementsTweetBlock(block: Block): block is TweetBlock {
 }
 
 type BlockValue =
+  | BookmarkBlockValue
   | CalloutBlockValue
   | CodeBlockValue
   | CollectionBlockValue

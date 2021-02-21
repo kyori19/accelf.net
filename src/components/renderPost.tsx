@@ -9,6 +9,7 @@ import {
 } from '../lib/notion/blocks'
 import blogStyles from '../styles/blog.module.css'
 import JsxParser from 'react-jsx-parser'
+import ExtLink from './ext-link'
 
 const headingTags: {
   [key in HeaderBlockValue['type']]: string | ComponentType
@@ -84,6 +85,32 @@ const RenderPost = ({
             if (value.properties) {
               toRender.push(textBlock(value.properties.title, false, id))
             }
+            break
+          case 'bookmark':
+            const { format, properties } = value
+            const { bookmark_cover, bookmark_icon } = format
+            const { link, title, description } = properties
+            toRender.push(
+              <ExtLink
+                className={blogStyles.bookmark}
+                href={link[0][0]}
+                key={id}
+              >
+                <span className={blogStyles.title}>{title[0][0]}</span>
+                <p className={blogStyles.description}>{description[0][0]}</p>
+                <img
+                  className={blogStyles.favicon}
+                  src={bookmark_icon}
+                  alt="Bookmark favicon"
+                />
+                <span className={blogStyles.url}>{link[0][0]}</span>
+                <img
+                  className={blogStyles.cover}
+                  src={bookmark_cover}
+                  alt="Bookmark cover"
+                />
+              </ExtLink>
+            )
             break
           case 'image':
           case 'video':
