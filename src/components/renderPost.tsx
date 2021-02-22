@@ -38,7 +38,7 @@ const createList = (list: List) => {
     elem: (
       <Root key={`list-root-${list.contents[0].id}`}>
         {list.contents.map(item => (
-          <li key={item.id}>
+          <li key={`list-item-${item.id}`}>
             {textBlock(item.text, true, item.id)}
             {item.child && createList(item.child).elem}
           </li>
@@ -241,7 +241,7 @@ const RenderPost = ({
                     position: 'relative',
                   }}
                   className="asset-wrapper"
-                  key={id}
+                  key={`wrapper-${id}`}
                 >
                   {child}
                 </div>
@@ -254,6 +254,7 @@ const RenderPost = ({
                   ...elements,
                   caption ? (
                     <div
+                      key={`caption-block-${id}`}
                       className="caption-block"
                       style={{
                         width,
@@ -261,7 +262,7 @@ const RenderPost = ({
                       }}
                     >
                       {media}
-                      {textBlock(caption, true, id)}
+                      {textBlock(caption, true, `caption-${id}`)}
                     </div>
                   ) : (
                     media
