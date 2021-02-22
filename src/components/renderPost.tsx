@@ -125,7 +125,12 @@ const RenderPost = ({
               return {
                 elements: [
                   ...elements,
-                  textBlock(value.properties.title, false, id),
+                  textBlock(
+                    value.properties.title,
+                    false,
+                    id,
+                    value.format?.block_color
+                  ),
                 ],
                 list,
               }

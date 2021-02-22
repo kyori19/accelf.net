@@ -35,6 +35,7 @@
   border-radius: 5px;
   transition: all 0.2s ease 0s;
 }
+
 .escapePreview:hover {
   background-color: white;
   color: black;
@@ -47,6 +48,7 @@
   align-items: center;
   justify-content: flex-start;
 }
+
 .draftBadge {
   border-radius: 16px;
   background-color: black;
@@ -220,4 +222,40 @@
 
 .post :global(a + p) {
   margin-top: 0;
+}
+
+.post :global(.blue) {
+  color: rgb(82, 156, 202);
+}
+
+.post :global(.brown) {
+  color: rgb(147, 114, 100);
+}
+
+.post :global(.gray) {
+  color: rgb(151, 154, 155);
+}
+
+.post :global(.green) {
+  color: rgb(77, 171, 154);
+}
+
+.post :global(.orange) {
+  color: rgb(255, 163, 68);
+}
+
+.post :global(.pink) {
+  color: rgb(226, 85, 161);
+}
+
+.post :global(.purple) {
+  color: rgb(154, 109, 215);
+}
+
+.post :global(.red) {
+  color: rgb(255, 115, 105);
+}
+
+.post :global(.yellow) {
+  color: rgb(255, 220, 73);
 }

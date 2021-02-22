@@ -28,6 +28,10 @@ function applyTags(
       props.displayMode = false
       child = tag[1]
     }
+    if (tagName === 'h') {
+      tagName = 'span'
+      props.className = tag[1]
+    }
 
     child = React.createElement(
       components[tagName as string] || tagName,
@@ -38,7 +42,12 @@ function applyTags(
   return child
 }
 
-export function textBlock(text: Text[], noPTag = false, mainKey) {
+export function textBlock(
+  text: Text[],
+  noPTag = false,
+  mainKey,
+  blockClass = ''
+) {
   const children = text.reduce((children, text, i) => {
     return [
       ...children,
@@ -47,8 +56,8 @@ export function textBlock(text: Text[], noPTag = false, mainKey) {
   }, [])
 
   return React.createElement(
-    noPTag ? React.Fragment : 'p',
-    { key: mainKey },
+    noPTag ? (blockClass ? 'div' : React.Fragment) : 'p',
+    blockClass ? { key: mainKey, className: blockClass } : { key: mainKey },
     ...children,
     noPTag
   )
