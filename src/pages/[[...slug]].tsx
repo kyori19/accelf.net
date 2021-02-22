@@ -55,7 +55,7 @@ export async function getStaticPaths() {
   const postsTable = await getIndex('pages')
   return {
     paths: postsTable
-      .filter(post => postIsPublished(post))
+      .filter(post => postIsPublished(post) && post.Slug !== 'blog')
       .map(post => getPageLink(post.Slug)),
     fallback: true,
   }
