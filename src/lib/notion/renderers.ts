@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react'
 import components from '../../components/components'
 import { Text } from './blocks'
+import Link from 'next/link'
 
 function applyTags(
   tags: string[],
@@ -22,6 +23,11 @@ function applyTags(
     }
     if (tagName === 'a') {
       props.href = tag[1]
+
+      if (/^https:\/\/internal(\/.*)$/.test(tag[1])) {
+        tagName = Link
+        props.href = tag[1].split('://internal')[1]
+      }
     }
     if (tagName === 'e') {
       tagName = components.Equation
