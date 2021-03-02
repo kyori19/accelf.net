@@ -69,14 +69,14 @@ const Index = ({
           return (
             <div className={blogStyles.postPreview} key={post.Slug}>
               <h3>
-                <Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
-                  <div className={blogStyles.titleContainer}>
-                    {!postIsPublished(post) && (
-                      <span className={blogStyles.draftBadge}>Draft</span>
-                    )}
+                <span className={blogStyles.titleContainer}>
+                  {!postIsPublished(post) && (
+                    <span className={blogStyles.draftBadge}>Draft</span>
+                  )}
+                  <Link href="/blog/[slug]" as={getBlogLink(post.Slug)}>
                     <a>{post.Page}</a>
-                  </div>
-                </Link>
+                  </Link>
+                </span>
               </h3>
               {post.authorName && (
                 <div className="authors">By: {post.authorName}</div>
