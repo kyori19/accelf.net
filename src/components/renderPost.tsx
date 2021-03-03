@@ -10,7 +10,7 @@ import {
   Text,
 } from '../lib/notion/blocks'
 import blogStyles from '../styles/blog.module.css'
-import JsxParser from 'react-jsx-parser'
+import JsxParser from '@zeit/react-jsx-parser'
 import ExtLink from './ext-link'
 
 const headingTags: {
@@ -37,7 +37,7 @@ const createList = (list: List) => {
   return {
     elem: (
       <Root key={`list-root-${list.contents[0].id}`}>
-        {list.contents.map(item => (
+        {list.contents.map((item) => (
           <li key={`list-item-${item.id}`}>
             {textBlock(item.text, true, item.id)}
             {item.child && createList(item.child).elem}
