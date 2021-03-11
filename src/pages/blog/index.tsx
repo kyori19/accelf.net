@@ -20,16 +20,16 @@ export async function getStaticProps({ preview }) {
   const [pages, posts] = await Promise.all([
     getIndex('pages'),
     getIndex('blog')
-      .then(posts => posts.filter(post => preview || postIsPublished(post)))
-      .then(async posts => {
+      .then((posts) => posts.filter((post) => preview || postIsPublished(post)))
+      .then(async (posts) => {
         const authorsToGet = new Set(
-          posts.map(post => post.Author).filter(Boolean)
+          posts.map((post) => post.Author).filter(Boolean)
         )
         const users = await getNotionUsers(...authorsToGet)
-        posts.forEach(post => {
+        posts.forEach((post) => {
           if (post.Author) {
             post.authorName = users.find(
-              user => post.Author === user.id
+              (user) => post.Author === user.id
             ).fullName
           }
         })
@@ -43,7 +43,7 @@ export async function getStaticProps({ preview }) {
       posts,
       pages,
     },
-    revalidate: 10,
+    revalidate: 300,
   }
 }
 
@@ -65,7 +65,7 @@ const Index = ({
         {posts.length === 0 && (
           <p className={blogStyles.noPosts}>There are no posts yet</p>
         )}
-        {posts.map(post => {
+        {posts.map((post) => {
           return (
             <div className={blogStyles.postPreview} key={post.Slug}>
               <h3>

@@ -25,7 +25,7 @@ export async function getStaticProps({
 }) {
   const path = slug.join('/')
   const pages = await getIndex('pages')
-  const post = pages.find(post => post.Slug === path)
+  const post = pages.find((post) => post.Slug === path)
 
   if (!post || (!postIsPublished(post) && !preview)) {
     console.log(`Failed to find post for slug: ${path}`)
@@ -34,7 +34,7 @@ export async function getStaticProps({
         redirect: `/`,
         preview: false,
       },
-      revalidate: 5,
+      revalidate: 60,
     }
   }
 
@@ -46,7 +46,7 @@ export async function getStaticProps({
       pages,
       preview: preview || false,
     },
-    revalidate: 10,
+    revalidate: 300,
   }
 }
 
@@ -55,8 +55,8 @@ export async function getStaticPaths() {
   const postsTable = await getIndex('pages')
   return {
     paths: postsTable
-      .filter(post => postIsPublished(post) && post.Slug !== 'blog')
-      .map(post => getPageLink(post.Slug)),
+      .filter((post) => postIsPublished(post) && post.Slug !== 'blog')
+      .map((post) => getPageLink(post.Slug)),
     fallback: true,
   }
 }

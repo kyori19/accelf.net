@@ -21,14 +21,14 @@ export async function getStaticProps({ params: { slug }, preview }) {
   const [pages, post] = await Promise.all([
     getIndex('pages'),
     getIndex('blog')
-      .then(posts => posts.find(post => post.Slug === slug))
-      .then(async post => {
+      .then((posts) => posts.find((post) => post.Slug === slug))
+      .then(async (post) => {
         await Promise.all([
           fetchPageData(post),
           post.Author &&
-            getNotionUsers(post.Author).then(users => {
+            getNotionUsers(post.Author).then((users) => {
               post.authorName = users.find(
-                user => post.Author === user.id
+                (user) => post.Author === user.id
               ).fullName
             }),
         ])
@@ -45,7 +45,7 @@ export async function getStaticProps({ params: { slug }, preview }) {
         redirect: '/blog',
         preview: false,
       },
-      revalidate: 5,
+      revalidate: 60,
     }
   }
 
@@ -55,7 +55,7 @@ export async function getStaticProps({ params: { slug }, preview }) {
       pages,
       preview: preview || false,
     },
-    revalidate: 10,
+    revalidate: 300,
   }
 }
 
@@ -67,8 +67,8 @@ export async function getStaticPaths() {
   // for actually published ones
   return {
     paths: posts
-      .filter(post => postIsPublished(post))
-      .map(post => getBlogLink(post.Slug)),
+      .filter((post) => postIsPublished(post))
+      .map((post) => getBlogLink(post.Slug)),
     fallback: true,
   }
 }
