@@ -1,0 +1,34 @@
+name: check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+
+  eslint:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v2
+
+      - name: Run ESLint 🐶
+        uses: reviewdog/action-eslint@v1
+        with:
+          fail_on_error: true
+
+  stylelint:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v2
+
+      - name: Run stylelint 🐶
+        uses: reviewdog/action-stylelint@v1
+        with:
+          github_token: ${{ github.token }}
+          reporter: github-pr-review
+          fail_on_error: true
+          stylelint_input: '**/*.{css,less,sass,scss}'
