@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "**.svg"
+      - .github/workflows/svg.yml
 
 jobs:
   check:
