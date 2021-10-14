@@ -1,4 +1,4 @@
-name: Check SVGs
+name: svg
 
 on:
   pull_request:
