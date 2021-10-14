@@ -7,7 +7,7 @@ on:
       - .github/workflows/svg.yml
 
 jobs:
-  check:
+  svgo:
     runs-on: ubuntu-latest
 
     defaults:
