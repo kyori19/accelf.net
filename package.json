@@ -12,7 +12,7 @@
     "lint:es:fix": "eslint --fix '**/*.{js,jsx,ts,tsx}'",
     "lint:style": "stylelint '**/*.{css,less,sass,scss}'",
     "lint:style:fix": "stylelint --fix '**/*.{css,less,sass,scss}'",
-    "svgo": "svgo -r assets"
+    "svgo": "svgo -r public"
   },
   "dependencies": {
     "next": "11.1.2",
