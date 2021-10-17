@@ -4,6 +4,8 @@ export default {
       name: 'preset-default',
       params: {
         overrides: {
+          cleanupIDs: false,
+          removeUselessDefs: false,
           removesUnknownsAndDefaults: {
             keepDataAttrs: false,
           },
