@@ -14,7 +14,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           <use href="/logo.svg#symbol" />
         </svg>
       </header>
-      <Component {...pageProps} />
+      <div className={styles.content}>
+        <Component {...pageProps} />
+      </div>
       <footer className={styles.footer}>
         <p>
           加速を与える力のように<span className={styles.space}>-</span><A href='/'>Team AccelForce</A>
