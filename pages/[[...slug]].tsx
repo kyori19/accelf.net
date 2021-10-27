@@ -3,7 +3,7 @@ import { loadPage } from '../lib/loadPage';
 import Renderer from '../lib/renderer';
 import styles from '../styles/Slug.module.scss';
 
-import type { Page} from '../lib/listIndex';
+import type { Page } from '../lib/listIndex';
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ExtendedRecordMap } from 'notion-types';
 
@@ -45,7 +45,7 @@ export const getStaticProps: GetStaticProps<PageProps, PageUrlProps> = ({ params
 
 const Slug: NextPage<PageProps> = ({ pages, recordMap }) => {
   return (<>
-    <Renderer className={styles.content} recordMap={recordMap} />
+    <Renderer className={styles.content} recordMap={recordMap}/>
   </>);
 };
 
