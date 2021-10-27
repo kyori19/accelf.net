@@ -13,3 +13,11 @@ body {
 svg {
   fill: currentColor;
 }
+
+.notion-hash-link {
+  margin-inline-end: 4px;
+
+  svg {
+    fill: var(--fg-secondary);
+  }
+}

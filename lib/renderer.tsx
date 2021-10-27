@@ -11,6 +11,7 @@ export type RendererProps = Pick<NotionRendererProps, 'className'> & {
 const Renderer: FC<RendererProps> = ({ className, recordMap }) => (
     <NotionRenderer
         className={className}
+        darkMode={true}
         recordMap={recordMap}
         components={{
           collectionRow: () => null,
