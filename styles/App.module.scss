@@ -12,6 +12,9 @@
 .root {
   background-color: var(--bg-primary);
   color: var(--fg-primary);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 
   a {
     color: var(--fg-accent);
@@ -27,6 +30,10 @@
   background-color: var(--bg-float);
   height: 62px;
   padding: 16px 32px;
+}
+
+.content {
+  flex-grow: 1;
 }
 
 .footer {
