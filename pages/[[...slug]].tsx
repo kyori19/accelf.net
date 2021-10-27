@@ -1,13 +1,21 @@
 import { pageIndex } from '../lib/listIndex';
 import { loadPage } from '../lib/loadPage';
+import Renderer from '../lib/renderer';
+import styles from '../styles/Slug.module.scss';
 
+import type { Page} from '../lib/listIndex';
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import type { ExtendedRecordMap } from 'notion-types';
+
 
 export type PageUrlProps = {
   slug: string[];
 };
 
-export type PageProps = {};
+export type PageProps = {
+  pages: Page[],
+  recordMap: ExtendedRecordMap,
+};
 
 export const getStaticPaths: GetStaticPaths<PageUrlProps> = () => pageIndex()
     .then((pages) => ({
@@ -35,9 +43,9 @@ export const getStaticProps: GetStaticProps<PageProps, PageUrlProps> = ({ params
       revalidate: 600,
     }));
 
-const Slug: NextPage<PageProps> = ({}) => {
+const Slug: NextPage<PageProps> = ({ pages, recordMap }) => {
   return (<>
-    <span>test</span>
+    <Renderer className={styles.content} recordMap={recordMap} />
   </>);
 };
 
