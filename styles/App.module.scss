@@ -32,6 +32,10 @@
   padding: 16px 32px;
 }
 
+.logo {
+  color: var(--fg-primary) !important;
+}
+
 .content {
   flex-grow: 1;
 }

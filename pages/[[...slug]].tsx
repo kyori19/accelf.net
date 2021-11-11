@@ -1,3 +1,5 @@
+import Head from 'next/head';
+
 import { pageIndex } from '../lib/listIndex';
 import { loadPage } from '../lib/loadPage';
 import Renderer from '../lib/renderer';
@@ -14,6 +16,7 @@ export type PageUrlProps = {
 
 export type PageProps = {
   pages: Page[],
+  page: Page,
   recordMap: ExtendedRecordMap,
 };
 
@@ -24,18 +27,19 @@ export const getStaticPaths: GetStaticPaths<PageUrlProps> = () => pageIndex()
     }));
 
 export const getStaticProps: GetStaticProps<PageProps, PageUrlProps> = ({ params }) => pageIndex()
-    .then(async pages => ({
-      pages,
-      recordMap: await loadPage((() => {
-        const page = pages.find(({ slug }) => (params?.slug || ['/']).join('/') === slug);
-        if (!page) {
-          throw new Error('Page not found');
-        }
-        return page.id;
-      })()),
-    }))
-    .then(({ pages, recordMap }) => ({
-      props: { pages, recordMap },
+    .then(async pages => {
+      const page = pages.find(({ slug }) => (params?.slug || ['/']).join('/') === slug);
+      if (!page) {
+        throw new Error('Page not found');
+      }
+      return {
+        pages,
+        page,
+        recordMap: await loadPage(page.id),
+      };
+    })
+    .then(props => ({
+      props,
       revalidate: 600,
     }))
     .catch(() => ({
@@ -43,9 +47,12 @@ export const getStaticProps: GetStaticProps<PageProps, PageUrlProps> = ({ params
       revalidate: 600,
     }));
 
-const Slug: NextPage<PageProps> = ({ pages, recordMap }) => {
+const Slug: NextPage<PageProps> = ({ page, recordMap }) => {
   return (<>
-    <Renderer className={styles.content} recordMap={recordMap}/>
+    <Head>
+      <title>{page.title} | Team AccelForce</title>
+    </Head>
+    <Renderer className={styles.content} recordMap={recordMap} />
   </>);
 };
 
