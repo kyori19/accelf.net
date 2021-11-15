@@ -1,14 +1,22 @@
 import Link from 'next/link';
-import React from 'react';
 
-import type { LinkProps } from 'next/link';
-import type { AnchorHTMLAttributes } from 'react';
+import type { AnchorHTMLAttributes, FC } from 'react';
 
-export type AProps = Pick<LinkProps, 'href'> &
-    Pick<AnchorHTMLAttributes<HTMLAnchorElement>, 'className' | 'rel'>;
+export type AProps = AnchorHTMLAttributes<HTMLAnchorElement>;
 
-const A: React.FC<AProps> = ({ href, children, className, rel }) => (
-    <Link href={href}><a className={className} rel={rel}>{children}</a></Link>
-);
+const A: FC<AProps> = ({ href, children, ...rest }) =>
+    href?.startsWith('/')
+        ? (
+            <Link href={href}>
+              <a {...rest}>
+                {children}
+              </a>
+            </Link>
+        )
+        : (
+            <a href={href} target='_blank' rel='noopener noreferrer' {...rest}>
+              {children}
+            </a>
+        );
 
 export default A;
