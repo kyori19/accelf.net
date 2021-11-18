@@ -27,13 +27,24 @@
 }
 
 .header {
+  align-items: center;
   background-color: var(--bg-float);
+  display: flex;
   height: 62px;
   padding: 16px 32px;
+
+  a {
+    color: var(--fg-primary) !important;
+  }
 }
 
 .logo {
-  color: var(--fg-primary) !important;
+  margin-right: 32px;
+}
+
+.anchor {
+  font-weight: 600;
+  padding: 8px;
 }
 
 .content {

@@ -6,19 +6,18 @@ import Renderer from '../lib/renderer';
 import styles from '../styles/Slug.module.scss';
 
 import type { Page } from '../lib/listIndex';
+import type { CommonProps } from './_app';
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ExtendedRecordMap } from 'notion-types';
-
 
 export type PageUrlProps = {
   slug: string[];
 };
 
 export type PageProps = {
-  pages: Page[],
   page: Page,
   recordMap: ExtendedRecordMap,
-};
+} & CommonProps;
 
 export const getStaticPaths: GetStaticPaths<PageUrlProps> = () => pageIndex()
     .then((pages) => ({
@@ -33,7 +32,7 @@ export const getStaticProps: GetStaticProps<PageProps, PageUrlProps> = ({ params
         throw new Error('Page not found');
       }
       return {
-        pages,
+        pages: pages.filter(({ header }) => header),
         page,
         recordMap: await loadPage(page.id),
       };
