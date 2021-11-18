@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             </svg>
           </A>
         </div>
-        {(pageProps as CommonProps).pages.map(({ slug, title }) => (
+        {(pageProps as CommonProps)?.pages && (pageProps as CommonProps).pages.map(({ slug, title }) => (
             <div className={styles.anchor} key={slug}>
               <A href={`/${slug}`}>
                 {title}
