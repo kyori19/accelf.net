@@ -7,7 +7,14 @@ async function index<T>(
     converter: (id: string, row: QueryDatabaseResponse['results'][number]['properties']) => T,
 ): Promise<T[]> {
   const notion = new Client({ auth: process.env.NOTION_OFFICIAL_TOKEN });
-  return await notion.databases.query({ database_id: id })
+  return await notion.databases
+      .query({
+        database_id: id,
+        sorts: [{
+          property: '#',
+          direction: 'ascending',
+        }],
+      })
       .then(({ results }) => results.map(({ id, properties }) => converter(id, properties)));
 }
 

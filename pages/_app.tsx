@@ -6,7 +6,12 @@ import A from '../components/a';
 import styles from '../styles/App.module.scss';
 import '../styles/globals.scss';
 
+import type { Page } from '../lib/listIndex';
 import type { AppProps } from 'next/app';
+
+export type CommonProps = {
+  pages: Page[],
+};
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (<>
@@ -15,11 +20,20 @@ function MyApp({ Component, pageProps }: AppProps) {
     </Head>
     <div className={classNames(styles.root, styles.dark)}>
       <header className={styles.header}>
-        <A className={styles.logo} href="/">
-          <svg viewBox="0 0 400 204" width={60} height={30}>
-            <use href="/logo.svg#symbol" />
-          </svg>
-        </A>
+        <div className={styles.logo}>
+          <A href="/">
+            <svg viewBox="0 0 400 204" width={60} height={30}>
+              <use href="/logo.svg#symbol" />
+            </svg>
+          </A>
+        </div>
+        {(pageProps as CommonProps)?.pages && (pageProps as CommonProps).pages.map(({ slug, title }) => (
+            <div className={styles.anchor} key={slug}>
+              <A href={`/${slug}`}>
+                {title}
+              </A>
+            </div>
+        ))}
       </header>
       <div className={styles.content}>
         <Component {...pageProps} />
