@@ -12,6 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (<>
     <Head>
       <title>Team AccelForce</title>
+      <link rel="icon" href="/favicon.svg" />
     </Head>
     <div className={classNames(styles.root, styles.dark)}>
       <header className={styles.header}>
