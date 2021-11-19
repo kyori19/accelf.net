@@ -21,7 +21,8 @@ export type PageProps = {
 
 export const getStaticPaths: GetStaticPaths<PageUrlProps> = () => pageIndex()
     .then((pages) => ({
-      paths: pages.map(({ slug }) => ({ params: { slug: slug.split('/') } })),
+      paths: pages.filter(({ published }) => published)
+          .map(({ slug }) => ({ params: { slug: slug.split('/') } })),
       fallback: false,
     }));
 
