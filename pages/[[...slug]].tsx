@@ -44,7 +44,7 @@ export const getStaticProps: GetStaticProps<PageProps, PageUrlProps> = ({ params
     }))
     .catch(() => ({
       notFound: true,
-      revalidate: 300,
+      revalidate: 900,
     }));
 
 const Slug: NextPage<PageProps> = ({ page, recordMap }) => {
