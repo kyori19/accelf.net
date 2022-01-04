@@ -40,11 +40,11 @@ export const getStaticProps: GetStaticProps<PageProps, PageUrlProps> = ({ params
     })
     .then(props => ({
       props,
-      revalidate: 600,
+      revalidate: 900,
     }))
     .catch(() => ({
       notFound: true,
-      revalidate: 600,
+      revalidate: 300,
     }));
 
 const Slug: NextPage<PageProps> = ({ page, recordMap }) => {
