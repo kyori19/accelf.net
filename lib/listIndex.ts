@@ -1,11 +1,15 @@
+import { getPropertyData, richTextAsPlainText } from '@jitl/notion-api';
 import { Client } from '@notionhq/client';
 
+import type {
+  Property} from '@jitl/notion-api';
 import type { QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints';
 
-async function index<T>(
+type Row = Extract<QueryDatabaseResponse['results'][number], { properties: Record<string, unknown> }>;
+
+async function index(
     id: string,
-    converter: (id: string, row: QueryDatabaseResponse['results'][number]['properties']) => T,
-): Promise<T[]> {
+): Promise<Row[]> {
   const notion = new Client({ auth: process.env.NOTION_OFFICIAL_TOKEN });
   return await notion.databases
       .query({
@@ -15,7 +19,7 @@ async function index<T>(
           direction: 'ascending',
         }],
       })
-      .then(({ results }) => results.map(({ id, properties }) => converter(id, properties)));
+      .then(({ results }) => results.filter((row): row is Row => 'properties' in row));
 }
 
 export type Page = {
@@ -33,14 +37,12 @@ export async function pageIndex(): Promise<Page[]> {
     throw new Error('PAGE_INDEX not set');
   }
 
-  return await index(
-      id,
-      (id, { Page, Slug, Header, Published }) => ({
-        id: id,
-        title: (Page.type === 'title') && (Page.title[0].type === 'text') && Page.title[0].text.content || '',
-        slug: (Slug.type === 'rich_text') && (Slug.rich_text[0].type === 'text') && Slug.rich_text[0].text.content || '',
-        header: (Header.type === 'checkbox') && Header.checkbox,
-        published: (Published.type === 'checkbox') && Published.checkbox,
-      }),
-  );
+  return (await index(id))
+      .map((row) => ({
+        id: row.id,
+        title: richTextAsPlainText(getPropertyData(row.properties.Page as Property<'title'>)),
+        slug: richTextAsPlainText(getPropertyData(row.properties.Slug as Property<'rich_text'>)),
+        header: getPropertyData(row.properties.Header as Property<'checkbox'>),
+        published: getPropertyData(row.properties.Published as Property<'checkbox'>),
+      }));
 }
