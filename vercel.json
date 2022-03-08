@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "*": {
+      "excludeFiles": "node_modules/emoji-datasource-apple"
+    }
+  }
+}
