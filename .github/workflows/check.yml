@@ -15,6 +15,9 @@ jobs:
       - name: Checkout 🛎
         uses: actions/checkout@v2
 
+      - name: Install dependencies
+        run: yarn
+
       - name: Run ESLint 🐶
         uses: reviewdog/action-eslint@v1
         with:
