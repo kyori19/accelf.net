@@ -1,6 +1,6 @@
 {
   "functions": {
-    "index": {
+    "pages/**/*": {
       "excludeFiles": "node_modules/emoji-datasource-apple"
     }
   }
