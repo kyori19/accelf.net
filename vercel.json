@@ -1,7 +1,7 @@
 {
   "functions": {
     "pages/**/*": {
-      "excludeFiles": "node_modules/emoji-datasource-apple"
+      "excludeFiles": "node_modules/emoji-datasource-apple/**/*"
     }
   }
 }
