@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import Head from 'next/head';
+import 'prismjs/themes/prism-tomorrow.css';
 import 'react-notion-x/src/styles.css';
 
 import A from '../components/a';
