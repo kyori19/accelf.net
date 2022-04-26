@@ -67,25 +67,24 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@jitl/notion-api@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@jitl/notion-api/-/notion-api-0.1.2.tgz#8c8d715b68a4f0404f3354241fdb7faaff995ce6"
-  integrity sha512-hhnV8Mt5lbpJX7yiEgS1XB3dvsCzTQLD8LFRO0hLPfxyBr3AuiG18WX3yv+2YSVC348fXvlhQPb16dpxaIUX1A==
+"@jitl/notion-api@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@jitl/notion-api/-/notion-api-0.2.2.tgz#ba98781db2bdb8b63a1cfeacee2ec90499528e0e"
+  integrity sha512-PBoIUttvk7IHmm8iP8+XM0TIYvijHRchR//WIm3qayC+g9vaAMQPl4WmmXJDTiF+fkN76txRrO2i82dYRUzFCA==
   dependencies:
-    "@jitl/util" "*"
+    "@jitl/util" "0.0.3"
     "@types/debug" "^4.1.7"
     "@types/mime-types" "^2.1.1"
     debug "^4.3.3"
-    emoji-datasource-apple "^7.0.2"
     emoji-unicode "^2.0.1"
     fast-safe-stringify "^2.1.1"
     mime-types "^2.1.34"
     node-emoji "^1.11.0"
 
-"@jitl/util@*":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@jitl/util/-/util-0.0.2.tgz#25856be66eec3583b35415cb9ccaf4d6dd4eb9db"
-  integrity sha512-xwUQr1fdqv0PpIrH/NlUCpECXolfKH2/uEZ6l2tgsePNZLmR1fqb7PDgT0QuPlLCxJMthndVoa236Ks77IOojA==
+"@jitl/util@0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@jitl/util/-/util-0.0.3.tgz#ef43903768c16200fcf4c0c9d4a79e5b9cb264f3"
+  integrity sha512-C7WAt4ROaPS9wL8Sxlen0KP9i/Z917rpModwkQBfNZUp61Be88CZx7T1hz7oG7nev9f2J+Ze2wDdQyS5uk+d8w==
 
 "@matejmazur/react-katex@^3.1.3":
   version "3.1.3"
@@ -180,10 +179,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@notionhq/client@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@notionhq/client/-/client-1.0.2.tgz#cdd9a13d82b9497c6ac1ed5829c31c50974aedda"
-  integrity sha512-i6jakmGLg/Iz9CVJ63v7V+kTnMLeDR8G/J5tc3cOEC/wH8Uh0xD4SCeUv4iRXCkrFkQ9zdJ7QGo9XUvefMDXJQ==
+"@notionhq/client@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@notionhq/client/-/client-1.0.4.tgz#405e9468576baf81019db4d791f4b52d091f4a57"
+  integrity sha512-m7zZ5l3RUktayf1lRBV1XMb8HSKsmWTv/LZPqP7UGC1NMzOlc+bbTOPNQ4CP/c1P4cP61VWLb/zBq7a3c0nMaw==
   dependencies:
     "@types/node-fetch" "^2.5.10"
     node-fetch "^2.6.1"
@@ -961,11 +960,6 @@ domutils@^2.8.0:
     dom-serializer "^1.0.1"
     domelementtype "^2.2.0"
     domhandler "^4.2.0"
-
-emoji-datasource-apple@^7.0.2:
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/emoji-datasource-apple/-/emoji-datasource-apple-7.0.2.tgz#20ba1788fbfa335147e1fd27bd54e11419964aa6"
-  integrity sha512-m127Ybt10utN5WF+0mehR2siDTh4CcS6N1Xq+0VE387XIZB+DYczrvc7amgAgEtema0lX1GpVzO2wEXKEChfqQ==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
