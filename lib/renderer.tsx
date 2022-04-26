@@ -1,4 +1,4 @@
-import { NotionRenderer } from 'react-notion-x';
+import { Code, NotionRenderer } from 'react-notion-x';
 
 import A from '../components/a';
 
@@ -17,6 +17,7 @@ const Renderer: FC<RendererProps> = ({ className, recordMap }) => (
         fullPage={false}
         recordMap={recordMap}
         components={{
+          code: Code,
           collectionRow: () => null,
           link: ({ href, children, ...rest }: AnchorHTMLAttributes<HTMLAnchorElement>) => (
               <A href={href?.replace(/^https:\/\/accelf\.net/, '')} {...rest}>
