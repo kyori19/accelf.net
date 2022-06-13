@@ -1,13 +1,13 @@
 .container {
   display: flex;
-  width: 720px;
   margin-left: auto;
   margin-right: auto;
+  width: 720px;
 }
 
 .meta {
-  width: 20%;
   padding: 8px;
+  width: 20%;
 
   p {
     margin: 2px;
@@ -19,10 +19,10 @@
 }
 
 .main {
-  flex-grow: 1;
 
   border: 1px solid var(--fg-divider);
   border-radius: 6px;
+  flex-grow: 1;
 
   h2 {
     margin: 16px;
@@ -30,8 +30,8 @@
 }
 
 .desc {
-  padding: 8px 8px;
-  margin: 0 8px;
 
   border-top: 1px solid var(--fg-divider);
+  margin: 0 8px;
+  padding: 8px;
 }
