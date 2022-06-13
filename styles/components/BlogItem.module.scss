@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.meta {
+  width: 20%;
+  padding: 8px;
+
+  p {
+    margin: 2px;
+  }
+}
+
+.author {
+  color: var(--fg-secondary);
+}
+
+.main {
+  flex-grow: 1;
+
+  border: 1px solid var(--fg-divider);
+  border-radius: 6px;
+
+  h2 {
+    margin: 16px;
+  }
+}
+
+.desc {
+  padding: 8px 8px;
+  margin: 0 8px;
+
+  border-top: 1px solid var(--fg-divider);
+}
