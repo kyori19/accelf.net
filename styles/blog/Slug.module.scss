@@ -1,0 +1,23 @@
+.meta {
+  margin: 32px auto 16px;
+  padding-left: calc(min(12px, 8vw));
+  padding-right: calc(min(12px, 8vw));
+  width: 720px;
+
+  h1 {
+    display: inline-block;
+    font-size: 1.875em;
+    margin-bottom: 8px;
+    margin-top: 1.08em;
+  }
+
+  table {
+    width: 100%;
+
+    th {
+      padding-right: 32px;
+      text-align: end;
+      width: 30%;
+    }
+  }
+}

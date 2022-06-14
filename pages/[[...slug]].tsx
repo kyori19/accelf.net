@@ -21,7 +21,7 @@ export type PageProps = {
 
 export const getStaticPaths: GetStaticPaths<PageUrlProps> = () => pageIndex()
     .then((pages) => ({
-      paths: pages.filter(({ published }) => published)
+      paths: pages.filter(({ published, slug }) => published && slug !== 'blog')
           .map(({ slug }) => ({ params: { slug: slug.split('/') } })),
       fallback: false,
     }));
@@ -29,11 +29,11 @@ export const getStaticPaths: GetStaticPaths<PageUrlProps> = () => pageIndex()
 export const getStaticProps: GetStaticProps<PageProps, PageUrlProps> = ({ params }) => pageIndex()
     .then(async pages => {
       const page = pages.find(({ slug }) => (params?.slug || ['/']).join('/') === slug);
-      if (!page) {
+      if (!page || !page.published) {
         throw new Error('Page not found');
       }
       return {
-        pages: pages.filter(({ header }) => header),
+        pages: pages.filter(({ header, published }) => header && published),
         page,
         recordMap: await loadPage(page.id),
       };
@@ -42,10 +42,13 @@ export const getStaticProps: GetStaticProps<PageProps, PageUrlProps> = ({ params
       props,
       revalidate: 900,
     }))
-    .catch(() => ({
-      notFound: true,
-      revalidate: 900,
-    }));
+    .catch((err) => {
+      console.error(err);
+      return {
+        notFound: true,
+        revalidate: 900,
+      };
+    });
 
 const Slug: NextPage<PageProps> = ({ page, recordMap }) => {
   return (<>
