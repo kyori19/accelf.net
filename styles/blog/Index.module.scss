@@ -1,9 +1,10 @@
 .header {
   margin: 32px auto;
-  width: 720px;
+  padding: 0 16px;
+  max-width: 720px;
 }
 
 .container > div {
-  margin-bottom: 16px;
-  margin-top: 16px;
+  margin: 16px 0;
+  padding: 0 16px;
 }

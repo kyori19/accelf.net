@@ -2,7 +2,7 @@
   margin: 32px auto 16px;
   padding-left: calc(min(12px, 8vw));
   padding-right: calc(min(12px, 8vw));
-  width: 720px;
+  max-width: 720px;
 
   h1 {
     display: inline-block;
