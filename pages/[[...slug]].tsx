@@ -46,7 +46,6 @@ export const getStaticProps: GetStaticProps<PageProps, PageUrlProps> = ({ params
       console.error(err);
       return {
         notFound: true,
-        revalidate: 900,
       };
     });
 
