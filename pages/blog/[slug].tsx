@@ -25,7 +25,7 @@ export const getStaticPaths: GetStaticPaths<PageUrlProps> = () => blogIndex()
     .then((blogs) => ({
       paths: blogs.filter(({ published }) => published)
           .map(({ slug }) => ({ params: { slug } })),
-      fallback: false,
+      fallback: 'blocking',
     }));
 
 export const getStaticProps: GetStaticProps<PageProps, PageUrlProps> = ({ params }) =>
@@ -49,7 +49,6 @@ export const getStaticProps: GetStaticProps<PageProps, PageUrlProps> = ({ params
           console.error(err);
           return {
             notFound: true,
-            revalidate: 900,
           };
         });
 

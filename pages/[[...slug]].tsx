@@ -23,7 +23,7 @@ export const getStaticPaths: GetStaticPaths<PageUrlProps> = () => pageIndex()
     .then((pages) => ({
       paths: pages.filter(({ published, slug }) => published && slug !== 'blog')
           .map(({ slug }) => ({ params: { slug: slug.split('/') } })),
-      fallback: false,
+      fallback: 'blocking',
     }));
 
 export const getStaticProps: GetStaticProps<PageProps, PageUrlProps> = ({ params }) => pageIndex()
@@ -46,7 +46,6 @@ export const getStaticProps: GetStaticProps<PageProps, PageUrlProps> = ({ params
       console.error(err);
       return {
         notFound: true,
-        revalidate: 900,
       };
     });
 
