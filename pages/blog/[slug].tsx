@@ -44,13 +44,7 @@ export const getStaticProps: GetStaticProps<PageProps, PageUrlProps> = ({ params
         .then((props) => ({
           props,
           revalidate: 900,
-        }))
-        .catch((err) => {
-          console.error(err);
-          return {
-            notFound: true,
-          };
-        });
+        }));
 
 const Slug: NextPage<PageProps> = ({ blog, recordMap }) => {
   return (<>
