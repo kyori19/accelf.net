@@ -44,14 +44,7 @@ export const getStaticProps: GetStaticProps<PageProps> = () =>
         .then((props) => ({
           props,
           revalidate: 900,
-        }))
-        .catch((err) => {
-          console.error(err);
-          return {
-            notFound: true,
-            revalidate: 900,
-          };
-        });
+        }));
 
 const Index: NextPage<PageProps> = ({ blogs }) => {
   return (<>
